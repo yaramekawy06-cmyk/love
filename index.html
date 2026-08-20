@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Important Question ❤️</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+
+    color: white;
+}
+
+
+/* Main card */
+
+.container {
+    width: 90%;
+    max-width: 600px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(15px);
+
+    padding: 45px 25px;
+
+    border-radius: 30px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+
+/* Heart */
+
+.heart {
+    font-size: 70px;
+
+    animation: heartbeat 1.2s infinite;
+}
+
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+
+}
+
+
+/* Titles */
+
+h1 {
+    font-size: 32px;
+
+    margin: 15px 0;
+}
+
+
+/* Text */
+
+p {
+    font-size: 18px;
+
+    line-height: 1.6;
+}
+
+
+/* Buttons container */
+
+.buttons {
+
+    margin-top: 30px;
+
+    position: relative;
+
+    height: 100px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 40px;
+}
+
+
+/* All buttons */
+
+button {
+
+    border: none;
+
+    padding: 15px 30px;
+
+    border-radius: 50px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+
+/* YES */
+
+#yes {
+
+    background: white;
+
+    color: #ff4f81;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.2);
+
+    position: relative;
+}
+
+
+#yes:hover {
+
+    transform: scale(1.1);
+}
+
+
+/* NO */
+
+#no {
+
+    background: rgba(0,0,0,0.2);
+
+    color: white;
+
+    position: relative;
+
+    transition:
+        left 0.25s ease,
+        top 0.25s ease,
+        transform 0.2s ease;
+}
+
+
+/* Message */
+
+#message {
+
+    display: none;
+
+    font-size: 22px;
+
+    margin-top: 20px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .container {
+
+        padding: 35px 18px;
+
+    }
+
+    h1 {
+
+        font-size: 26px;
+
+    }
+
+    p {
+
+        font-size: 16px;
+
+    }
+
+    .buttons {
+
+        gap: 25px;
+
+    }
+
+    button {
+
+        padding: 13px 24px;
+
+        font-size: 16px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container" id="main">
+
+
+    <div class="heart">
+        ❤️
+    </div>
+
+
+    <h1>
+        هلا يا لجين
+    </h1>
+
+
+    <p>
+
+        كنت قاعد فاضي فقولت اتسلى
+
+        <br><br>
+
+        فقولت اسألك عن سؤال مهم عشان اقدر احدد
+        مستقبلي معاكي هيكون ايه
+
+    </p>
+
+
+    <h1>
+        انتِ عايزه تكوني معايا؟
+    </h1>
+
+
+    <div class="buttons">
+
+        <button id="yes">
+            YES ❤️
+        </button>
+
+        <button id="no">
+            NO 💔
+        </button>
+
+    </div>
+
+
+    <div id="message"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+const noButton =
+    document.getElementById("no");
+
+const yesButton =
+    document.getElementById("yes");
+
+const message =
+    document.getElementById("message");
+
+
+let attempts = 0;
+
+
+
+/*
+    NO BUTTON MOVEMENT
+*/
+
+function moveNoButton() {
+
+    attempts++;
+
+
+    const container =
+        document.querySelector(".buttons");
+
+
+    /*
+        Change NO from normal flex
+        positioning to absolute positioning
+    */
+
+    noButton.style.position = "absolute";
+
+
+    const buttonWidth =
+        noButton.offsetWidth;
+
+
+    const containerWidth =
+        container.clientWidth;
+
+
+    /*
+        Randomly choose LEFT or RIGHT
+    */
+
+    const goRight =
+        Math.random() > 0.5;
+
+
+    if (goRight) {
+
+        noButton.style.left =
+            (containerWidth - buttonWidth - 5) + "px";
+
+    } else {
+
+        noButton.style.left =
+            "5px";
+
+    }
+
+
+    /*
+        Keep the button vertically aligned
+    */
+
+    noButton.style.top =
+        "0px";
+
+
+    /*
+        Different messages
+    */
+
+    const messages = [
+
+        "ليه كدا ",
+
+        "هذا الاختيار غير متاح ",
+
+        "انتي متأكده؟ ",
+
+        "طب فكري تاني ",
+
+
+        "جربي YES يمكن يعجبك ",
+
+        "خلاص بقى وافقي "
+
+    ];
+
+
+    noButton.innerText =
+        messages[
+            Math.min(
+                attempts - 1,
+                messages.length - 1
+            )
+        ];
+
+}
+
+
+
+/*
+    DESKTOP
+*/
+
+noButton.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+
+/*
+    MOBILE
+*/
+
+noButton.addEventListener(
+    "touchstart",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+
+/*
+    IF SHE ACTUALLY CLICKS IT
+*/
+
+noButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+
+/*
+    YES BUTTON
+*/
+
+yesButton.addEventListener(
+    "click",
+    function() {
+
+
+        document.getElementById("main").innerHTML = `
+
+            <div class="heart">
+                ❤️
+            </div>
+
+
+            <h1>
+                ACCESS GRANTED ❤️
+            </h1>
+
+
+            <p>
+
+                Congratulations.
+
+                <br><br>
+
+                You have successfully accepted
+                the most important request of my life.
+
+            </p>
+
+
+            <h1>
+                بحبك ❤️
+            </h1>
+
+
+            <p>
+
+                للأسف بقى هحاول معاكي تاني 
+
+            </p>
+
+        `;
+
+
+        createHearts();
+
+    }
+);
+
+
+
+/*
+    HEART ANIMATION
+*/
+
+function createHearts() {
+
+
+    for (let i = 0; i < 50; i++) {
+
+
+        const heart =
+            document.createElement("div");
+
+
+        heart.innerHTML =
+            "❤️";
+
+
+        heart.style.position =
+            "fixed";
+
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+
+        heart.style.top =
+            "100vh";
+
+
+        heart.style.fontSize =
+            (15 + Math.random() * 30) + "px";
+
+
+        heart.style.transition =
+            "transform 4s linear, opacity 4s";
+
+
+        document.body.appendChild(
+            heart
+        );
+
+
+        setTimeout(() => {
+
+
+            heart.style.transform =
+                `translateY(-${
+                    window.innerHeight + 200
+                }px)
+                rotate(${
+                    Math.random() * 360
+                }deg)`;
+
+
+            heart.style.opacity =
+                "0";
+
+
+        }, 50);
+
+
+        setTimeout(() => {
+
+
+            heart.remove();
+
+
+        }, 4500);
+
+    }
+
+}
+
+</script>
+
+
+</body>
+</html>
